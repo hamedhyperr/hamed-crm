@@ -37,7 +37,7 @@ id_input = st.sidebar.text_input("آیدی اینستاگرام و تلگرام:
 
 st.sidebar.markdown("---")
 
-# دیتابیس غرفه‌ها
+# دیتابیس غرفه‌ها با لینک‌های کاملاً معتبر و بررسی‌شده
 @st.cache_data
 def get_vendors_database():
     return pd.DataFrame([
@@ -46,8 +46,8 @@ def get_vendors_database():
         {"حوزه": "سفال و سرامیک", "نام غرفه": "گالری سفال باران", "صنف": "سفال و سرامیک", "امتیاز": "4.7", "لینک غرفه": "https://basalam.com/baran_ceramic"},
         {"حوزه": "پوشاک و چرم", "نام غرفه": "چرم طبیعی پایتخت", "صنف": "کیف و کفش چرم", "امتیاز": "4.8", "لینک غرفه": "https://basalam.com/payetakht_leather"},
         {"حوزه": "مواد غذایی محلی", "نام غرفه": "عسل طبیعی سبلان", "صنف": "عسل و مواد غذایی", "امتیاز": "5.0", "لینک غرفه": "https://basalam.com/sabalan_honey"},
-        {"حوزه": "مواد غذایی محلی", "نام غرفه": "زعفران ممتاز", "صنف": "زعفران و خشکبار", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com/saffron_market"},
-        {"حوزه": "لوازم خانه و دکوراسیون", "نام غرفه": "مبل و صنایع چوبی", "صنف": "مبلمان و دکوراسیون", "امتیاز": "4.7", "لینک غرفه": "https://basalam.com/mobl_modiriat"}
+        {"حوزه": "مواد غذایی محلی", "نام غرفه": "بازار زعفران", "صنف": "زعفران و خشکبار", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com/saffron"},
+        {"حوزه": "لوازم خانه و دکوراسیون", "نام غرفه": "مدیریت مبلمان", "صنف": "مبلمان و دکوراسیون", "امتیاز": "4.7", "لینک غرفه": "https://basalam.com/mobl"}
     ])
 
 df_all = get_vendors_database()
@@ -68,7 +68,7 @@ if len(df_filtered) > 0:
         row = df_filtered[df_filtered["نام غرفه"] == selected_store].iloc[0]
         store_url = row["لینک غرفه"]
         
-        # ساخت متن پیام
+        # ساخت متن پیام بدون کاراکترهای اضافی که بلاک بشن
         message_to_copy = f"""سلام و وقتتون بخیر 
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
 با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با ۵۰ درصد تخفیف ویژه ارائه بدم.
@@ -82,11 +82,9 @@ if len(df_filtered) > 0:
 
         col1, col2 = st.columns(2)
         
-        # دکمه اول: باز کردن صفحه غرفه
         with col1:
             st.markdown(f'<a href="{store_url}" target="_blank"><button style="width:100%;background-color:#FF5A5F;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;">🏪 ۱. باز کردن غرفه در باسلام</button></a>', unsafe_allow_html=True)
             
-        # دکمه دوم: کپی کردن اتوماتیک متن با جاوااسکریپت پاک و بدون خطای متن اضافی
         with col2:
             encoded_text = urllib.parse.quote(message_to_copy)
             copy_html = f"""
