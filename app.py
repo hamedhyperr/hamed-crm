@@ -22,16 +22,6 @@ st.markdown("""
         text-align: right;
         margin-top: 20px;
     }
-    .contact-btn {
-        display: inline-block;
-        padding: 10px 15px;
-        margin: 5px;
-        background-color: #0088cc;
-        color: white !important;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -39,21 +29,21 @@ st.title("🎯 ربات جامع و هوشمند بازاریابی غرفه‌�
 st.markdown("دسترسی به اصناف، لینک‌های مستقیم و دکمه واقعی کپی متن دایرکت")
 st.markdown("---")
 
-# پنل سایدبار برای تنظیم دقیق راه‌های ارتباطی
-st.sidebar.header("📌 ثبت لینک‌ها و راه‌های ارتباطی شما")
-phone_num = st.sidebar.text_input("شماره تلفن (برای تماس):", "09120000000")
-whatsapp_num = st.sidebar.text_input("شماره واتساپ (با کد کشور، مثلاً 98912...):", "989120000000")
-telegram_id = st.sidebar.text_input("آیدی تلگرام (بدون @):", "YourTelegramID")
+# پنل سایدبار برای مدیریت راه‌های ارتباطی
+st.sidebar.header("📌 راه‌های ارتباطی و اطلاعات شما")
+phone_num = st.sidebar.text_input("شماره تماس:", "09164776687")
+whatsapp_num = st.sidebar.text_input("شماره واتساپ:", "989164776687")
+telegram_id = st.sidebar.text_input("آیدی تلگرام:", "hamedhyperr")
+instagram_id = st.sidebar.text_input("آیدی اینستاگرام:", "hamedhyperr")
+site_link = st.sidebar.text_input("آدرس سایت:", "https://hamedhyperr.ir")
 yt_link = st.sidebar.text_input("لینک یوتیوب:", "https://youtube.com/@HyperrTube")
-ig_link = st.sidebar.text_input("لینک اینستاگرام:", "https://instagram.com/...")
-site_link = st.sidebar.text_input("آدرس سایت:", "https://...")
 
 st.sidebar.markdown("---")
 
-# ساخت لینک‌های کلیک‌پذیر استاندارد
+# ساخت لینک‌های مستقیم و قابل کلیک
 wa_url = f"https://wa.me/{whatsapp_num}"
 tg_url = f"https://t.me/{telegram_id}"
-call_url = f"tel:{phone_num}"
+ig_url = f"https://instagram.com/{instagram_id}"
 
 # دیتابیس کامل و جامع اصناف و غرفه‌ها
 @st.cache_data
@@ -113,32 +103,35 @@ if len(df_filtered) > 0:
 
         # بخش پیام همدلانه و دکمه واقعی کپی با جاوااسکریپت
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
-        st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی (تخفیف ۵۰٪):")
+        st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی (تخفیف ۵۰٪ همراه با نمونه‌کارها):")
         
-        # متن شامل لینک‌های کلیک‌پذیر و راه‌های ارتباطی
+        # متن کامل شامل لینک‌های کلیک‌پذیر و مشخص کردن نمونه‌کارها
         message_to_copy = f"""سلام و وقتتون بخیر 🌺
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
 با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با **۵۰ درصد تخفیف ویژه** ارائه بدم.
 من در زمینه تولید تیزرها و ویدیوهای تبلیغاتی حرفه‌ای فعالیت می‌کنم تا محصولات شما در باسلام و اینستاگرام بهتر دیده بشن و فروش چندبرابری داشته باشن.
 
-🎥 مشاهده نمونه کارها در یوتیوب: {yt_link}
-📸 صفحه اینستاگرام: {ig_link}
+👇 اینها نمونه‌کارهای من هستند (برای مشاهده و بررسی لمس کنید):
 🌐 وب‌سایت رسمی: {site_link}
-💬 ارتباط مستقیم در تلگرام: {tg_url}
+🎥 نمونه‌کارها در یوتیوب: {yt_link}
+📸 صفحه اینستاگرام (نمونه کار): {ig_url}
+
+👇 برای ارتباط و هماهنگی مستقیم لمس کنید:
+💬 چت در تلگرام: {tg_url}
 🟢 چت در واتساپ: {wa_url}
-📞 شماره تماس مستقیم: {phone_num}
+📞 تماس تلفنی: {phone_num}
 
 اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم در ارتباط باشیم.
 موفق و پرفروش باشید 🤝"""
 
-        st.text_area("پیش‌نمایش متن دایرکت:", message_to_copy, height=270)
+        st.text_area("پیش‌نمایش متن دایرکت:", message_to_copy, height=330)
         
         # دکمه واقعی کپی با جاوااسکریپت
         safe_text = message_to_copy.replace('\n', '\\n').replace('"', '\\"')
         copy_button_html = f"""
         <button onclick="navigator.clipboard.writeText(`{safe_text}`);alert('متن با موفقیت کپی شد! حالا توی دایرکت پیستش کن.');" 
             style="width:100%;background-color:#28a745;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px;">
-            📋 کپی کردن واقعی متن پیام (همراه با تمام لینک‌ها و راه‌های ارتباطی)
+            📋 کپی کردن واقعی متن پیام (همراه با لینک‌های لمس‌شدنی و نمونه‌کارها)
         </button>
         """
         st.markdown(copy_button_html, unsafe_allow_html=True)
