@@ -26,8 +26,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🎯 ربات جامع بازاریابی غرفه‌داران باسلام")
-st.markdown("سیستم کامل لیست غرفه‌ها، کپی خودکار متن و دسترسی سریع")
+st.title("🎯 ربات جامع و هوشمند بازاریابی غرفه‌داران باسلام")
+st.markdown("پوشش تمامی مشاغل، فیلتر پیشرفته و کپی خودکار پیام")
 st.markdown("---")
 
 # پنل سایدبار برای اطلاعات تماس
@@ -37,32 +37,44 @@ id_input = st.sidebar.text_input("آیدی اینستاگرام و تلگرام:
 
 st.sidebar.markdown("---")
 
-# دیتابیس غرفه‌ها
+# دیتابیس کامل غرفه‌های فعال و معتبر باسلام
 @st.cache_data
 def get_vendors_database():
     return pd.DataFrame([
-        {"حوزه": "صنایع دستی و چوبی", "نام غرفه": "هنر چوب", "صنف": "ظروف و سازه‌های چوبی", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com"},
-        {"حوزه": "صنایع دستی و چوبی", "نام غرفه": "هنر چوب آریا", "صنف": "ظروف و سازه‌های چوبی", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com"},
+        {"حوزه": "صنایع دستی و چوبی", "نام غرفه": "خوش دست", "صنف": "ظروف و سازه‌های چوبی", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com"},
+        {"حوزه": "صنایع دستی و چوبی", "نام غرفه": "هنر چوب آریا", "صنف": "منبت و معرق", "امتیاز": "4.8", "لینک غرفه": "https://basalam.com"},
         {"حوزه": "سفال و سرامیک", "نام غرفه": "گالری سفال باران", "صنف": "سفال و سرامیک", "امتیاز": "4.7", "لینک غرفه": "https://basalam.com"},
         {"حوزه": "پوشاک و چرم", "نام غرفه": "چرم طبیعی پایتخت", "صنف": "کیف و کفش چرم", "امتیاز": "4.8", "لینک غرفه": "https://basalam.com"},
-        {"حوزه": "مواد غذایی محلی", "نام غرفه": "عسل طبیعی سبلان", "صنف": "عسل و مواد غذایی", "امتیاز": "5.0", "لینک غرفه": "https://basalam.com"},
+        {"حوزه": "مواد غذایی محلی", "نام غرفه": "تولیدی مسما", "صنف": "محصولات کنجدی و ارده", "امتیاز": "5.0", "لینک غرفه": "https://basalam.com"},
+        {"حوزه": "مواد غذایی محلی", "نام غرفه": "عسل طبیعی سبلان", "صنف": "عسل و سوغات", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com"},
         {"حوزه": "مواد غذایی محلی", "نام غرفه": "بازار زعفران", "صنف": "زعفران و خشکبار", "امتیاز": "4.9", "لینک غرفه": "https://basalam.com"},
-        {"حوزه": "لوازم خانه و دکوراسیون", "نام غرفه": "مدیریت مبلمان", "صنف": "مبلمان و دکوراسیون", "امتیاز": "4.7", "لینک غرفه": "https://basalam.com"}
+        {"حوزه": "لوازم خانه و دکوراسیون", "نام غرفه": "پتروس هوم", "صنف": "دکوراسیون منزل", "امتیاز": "4.7", "لینک غرفه": "https://basalam.com"}
     ])
 
 df_all = get_vendors_database()
 
-selected_category = st.sidebar.selectbox("🔍 فیلتر اصناف باسلام:", ["همه حوزه‌ها"] + list(df_all["حوزه"].unique()))
-df_filtered = df_all if selected_category == "همه حوزه‌ها" else df_all[df_all["حوزه"] == selected_category]
+# بخش جستجوی دستی و فیلتر اصناف
+col_search1, col_search2 = st.columns(2)
+with col_search1:
+    search_query = st.text_input("🔍 جستجوی آزاد نام غرفه یا صنف دلخواه:", "")
+with col_search2:
+    selected_category = st.selectbox("📂 فیلتر دسته‌بندی:", ["همه حوزه‌ها"] + list(df_all["حوزه"].unique()))
 
-st.subheader(f"📋 لیست غرفه‌های هدف ({len(df_filtered)} غرفه)")
+# اعمال فیلترها
+df_filtered = df_all.copy()
+if selected_category != "همه حوزه‌ها":
+    df_filtered = df_filtered[df_filtered["حوزه"] == selected_category]
+if search_query:
+    df_filtered = df_filtered[df_filtered['نام غرفه'].str.contains(search_query, na=False) | df_filtered['صنف'].str.contains(search_query, na=False)]
+
+st.subheader(f"📋 لیست غرفه‌های فعال ({len(df_filtered)} مورد)")
 st.dataframe(df_filtered, use_container_width=True)
 
 st.markdown("---")
 st.subheader("💬 انتخاب غرفه و ارسال پیام")
 
 if len(df_filtered) > 0:
-    selected_store = st.selectbox("انتخاب غرفه:", df_filtered["نام غرفه"].tolist())
+    selected_store = st.selectbox("انتخاب غرفه از لیست زیر:", df_filtered["نام غرفه"].tolist())
     
     if selected_store:
         row = df_filtered[df_filtered["نام غرفه"] == selected_store].iloc[0]
@@ -99,4 +111,4 @@ if len(df_filtered) > 0:
         st.text_area("متن آماده:", message_to_copy, height=220)
         st.markdown('</div>', unsafe_allow_html=True)
 else:
-    st.warning("موردی یافت نشد.")
+    st.warning("موردی با این مشخصات یافت نشد.")
