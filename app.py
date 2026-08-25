@@ -26,7 +26,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🎯 ربات هوشمند بازاریابی غرفه‌داران باسلام")
-st.markdown("ارسال ۱۰۰٪ امن و بدون خطای بلاک شدن در باسلام")
+st.markdown("محیط کاملاً تمیز، سریع و بدون خطای ارسال")
 st.markdown("---")
 
 # پنل سایدبار
@@ -79,9 +79,8 @@ if len(df_filtered) > 0:
             st.markdown(f'<a href="{store_url}" target="_blank"><button style="width:100%;background-color:#FF5A5F;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;">🏪 باز کردن صفحه غرفه در باسلام</button></a>', unsafe_allow_html=True)
 
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
-        st.subheader("📝 متن کاملاً پاکسازی شده و ایمن:")
+        st.subheader("📝 متن آماده برای دایرکت:")
         
-        # متن فوق‌العاده ایمن بدون هیچ کاراکتر حساسی که باسلام بلاک کند
         message_to_copy = f"""سلام و وقتتون بخیر 
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
 با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با ۵۰ درصد تخفیف ویژه ارائه بدم.
@@ -93,15 +92,10 @@ if len(df_filtered) > 0:
 اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم در ارتباط باشیم.
 موفق و پرفروش باشید"""
 
-        st.text_area("پیش‌نمایش متن:", message_to_copy, height=250)
+        # جعبه متنی برای کپی دستی خیلی راحت و بی‌دردسر
+        st.text_area("متن زیر را کپی کنید:", message_to_copy, height=250)
         
-        copy_button_html = f"""
-        <button onclick="navigator.clipboard.writeText(`{message_to_copy}`);alert('متن کپی شد! حالا توی دایرکت باسلام پیست کن.');" 
-            style="width:100%;background-color:#28a745;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px;">
-            📋 کپی کردن متن (تضمینی و بدون خطا در باسلام)
-        </button>
-        """
-        st.markdown(copy_button_html, unsafe_allow_html=True)
+        st.success("✨ متن بالا کاملاً استاندارده، کافیست از کادر بالا کپی کنید و در دایرکت باسلام بفرستید.")
             
         st.markdown('</div>', unsafe_allow_html=True)
 else:
