@@ -26,15 +26,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🎯 ربات هوشمند بازاریابی غرفه‌داران باسلام")
-st.markdown("بدون خطای بلاک شدن لینک‌ها در باسلام")
+st.markdown("ارسال ۱۰۰٪ امن و بدون خطای بلاک شدن در باسلام")
 st.markdown("---")
 
 # پنل سایدبار
-st.sidebar.header("📌 اطلاعات شما (بدون لینک برای جلوگیری از بلاک)")
+st.sidebar.header("📌 اطلاعات تماس شما")
 phone_input = st.sidebar.text_input("شماره تماس / واتساپ:", "09164776687")
 id_input = st.sidebar.text_input("آیدی اینستاگرام و تلگرام:", "hamedhyperr")
-site_input = st.sidebar.text_input("سایت:", "hamedhyperr.ir")
-yt_input = st.sidebar.text_input("یوتیوب:", "HyperrTube")
 
 st.sidebar.markdown("---")
 
@@ -81,28 +79,26 @@ if len(df_filtered) > 0:
             st.markdown(f'<a href="{store_url}" target="_blank"><button style="width:100%;background-color:#FF5A5F;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;">🏪 باز کردن صفحه غرفه در باسلام</button></a>', unsafe_allow_html=True)
 
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
-        st.subheader("📝 متن استاندارد و بدون لینک (بدون مشکل بلاک شدن):")
+        st.subheader("📝 متن کاملاً پاکسازی شده و ایمن:")
         
-        # متن کاملاً پاکسازی شده از لینک‌های طولانی که باسلام گیر بده
-        message_to_copy = f"""سلام و وقتتون بخیر 🌺
+        # متن فوق‌العاده ایمن بدون هیچ کاراکتر حساسی که باسلام بلاک کند
+        message_to_copy = f"""سلام و وقتتون بخیر 
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
-با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با **۵۰ درصد تخفیف ویژه** ارائه بدم.
+با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با ۵۰ درصد تخفیف ویژه ارائه بدم.
 من در زمینه تولید تیزرها و ویدیوهای تبلیغاتی حرفه‌ای فعالیت می‌کنم تا محصولات شما در باسلام و اینستاگرام بهتر دیده بشن و فروش چندبرابری داشته باشن.
 
-نمونه‌کارهای من در اینستاگرام و تلگرام: @{id_input}
-سایت رسمی: {site_input}
-کانال یوتیوب: {yt_input}
+نمونه کارها در اینستاگرام و تلگرام: {id_input}
 تماس و واتساپ: {phone_input}
 
 اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم در ارتباط باشیم.
-موفق و پرفروش باشید 🤝"""
+موفق و پرفروش باشید"""
 
-        st.text_area("پیش‌نمایش متن:", message_to_copy, height=280)
+        st.text_area("پیش‌نمایش متن:", message_to_copy, height=250)
         
         copy_button_html = f"""
-        <button onclick="navigator.clipboard.writeText(`{message_to_copy}`);alert('متن کپی شد! حالا توی دایرکت باسلام پیست کن و بفرست.');" 
+        <button onclick="navigator.clipboard.writeText(`{message_to_copy}`);alert('متن کپی شد! حالا توی دایرکت باسلام پیست کن.');" 
             style="width:100%;background-color:#28a745;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px;">
-            📋 کپی کردن متن (بدون خطا و تضمینی برای ارسال در باسلام)
+            📋 کپی کردن متن (تضمینی و بدون خطا در باسلام)
         </button>
         """
         st.markdown(copy_button_html, unsafe_allow_html=True)
