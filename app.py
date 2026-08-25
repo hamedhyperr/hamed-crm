@@ -29,6 +29,17 @@ st.title("🎯 ربات جامع و هوشمند بازاریابی غرفه‌�
 st.markdown("دسترسی به اصناف، لینک‌های مستقیم و دکمه واقعی کپی متن دایرکت")
 st.markdown("---")
 
+# پنل سایدبار برای اطلاعات شخصی و نمونه‌کارهای حامد
+st.sidebar.header("📌 راه‌های ارتباطی و نمونه‌کارهای من")
+st.sidebar.markdown("برای قرار دادن لینک‌ها در پیام یا معرفی به مشتری:")
+
+yt_link = st.sidebar.text_input("لینک یوتیوب (نمونه کارها):", "https://youtube.com/@HyperrTube")
+ig_link = st.sidebar.text_input("لینک اینستاگرام:", "پیست کنید")
+site_link = st.sidebar.text_input("آدرس سایت:", "پیست کنید")
+phone_num = st.sidebar.text_input("شماره تلفن:", "ثبت کنید")
+
+st.sidebar.markdown("---")
+
 # دیتابیس کامل و جامع اصناف و غرفه‌ها
 @st.cache_data
 def get_vendors_database():
@@ -59,8 +70,7 @@ def get_vendors_database():
 df_all = get_vendors_database()
 
 # فیلتر در سایدبار
-st.sidebar.header("🔍 فیلتر اصناف باسلام")
-selected_category = st.sidebar.selectbox("انتخاب حوزه فعالیت:", ["همه حوزه‌ها"] + list(df_all["حوزه"].unique()))
+selected_category = st.sidebar.selectbox("🔍 فیلتر اصناف باسلام بر اساس حوزه فعالیت:", ["همه حوزه‌ها"] + list(df_all["حوزه"].unique()))
 
 if selected_category != "همه حوزه‌ها":
     df_filtered = df_all[df_all["حوزه"] == selected_category]
@@ -90,21 +100,28 @@ if len(df_filtered) > 0:
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
         st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی (تخفیف ۵۰٪):")
         
-        message_to_copy = """سلام و وقتتون بخیر 🌺
+        # متن شامل لینک‌های وارد شده توسط حامد
+        message_to_copy = f"""سلام و وقتتون بخیر 🌺
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
 با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با **۵۰ درصد تخفیف ویژه** ارائه بدم.
 من در زمینه تولید تیزرها و ویدیوهای تبلیغاتی حرفه‌ای فعالیت می‌کنم تا محصولات شما در باسلام و اینستاگرام بهتر دیده بشن و فروش چندبرابری داشته باشن.
-اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم نمونه‌کار بفرستم خدمتتون.
+
+🎥 نمونه کارهای یوتیوب: {yt_link}
+📸 اینستاگرام: {ig_link}
+🌐 وب‌سایت: {site_link}
+📞 شماره تماس: {phone_num}
+
+اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم در ارتباط باشیم.
 موفق و پرفروش باشید 🤝"""
 
-        st.text_area("پیش‌نمایش متن:", message_to_copy, height=190)
+        st.text_area("پیش‌نمایش متن دایرکت:", message_to_copy, height=230)
         
-        # استفاده از دکمه HTML/JS اختصاصی برای کپی دقیق و واقعی به کلیپ‌بورد سیستم
+        # دکمه واقعی کپی با جاوااسکریپت
         safe_text = message_to_copy.replace('\n', '\\n').replace('"', '\\"')
         copy_button_html = f"""
-        <button onclick="navigator.clipboard.writeText(`{message_to_copy}`);alert('متن با موفقیت کپی شد! حالا توی دایرکت پیستش کن.');" 
+        <button onclick="navigator.clipboard.writeText(`{safe_text}`);alert('متن با موفقیت کپی شد! حالا توی دایرکت پیستش کن.');" 
             style="width:100%;background-color:#28a745;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px;">
-            📋 کپی کردن واقعی متن پیام با یک کلیک
+            📋 کپی کردن واقعی متن پیام (همراه با لینک‌ها و شماره تماس)
         </button>
         """
         st.markdown(copy_button_html, unsafe_allow_html=True)
