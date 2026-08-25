@@ -1,18 +1,18 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Hamed Automation CRM", layout="wide")
-st.title("Hamed Automation CRM - Industrial Marketing")
+st.set_page_config(page_title="سیستم مدیریت مشتریان حامد", layout="wide")
+st.title("سیستم اتوماسیون و مدیریت مشتریان (CRM) - بازاریابی صنعتی")
 
 data = {
-    "Lead ID": ["IND-001", "IND-002", "SHH-001", "SAF-001"],
-    "Business Name": ["Tarashkari Pars", "Sanaye Choob Arya", "Pooshak Sarina", "Mekanik Part"],
-    "Industry": ["Machinery", "Wood and Cabinet", "Textile", "Industrial Parts"],
-    "City": ["Safadasht", "Safadasht", "Shahriar", "Shamsabad"],
-    "Status": ["New", "Contacted", "New", "Deal Closed"],
-    "Phone": ["09121111111", "09122222222", "09123333333", "09124444444"]
+    "شناسه": ["IND-001", "IND-002", "SHH-001", "SAF-001"],
+    "نام کسب‌وکار": ["تراشکاری پارس", "صنایع چوب آریا", "پوشاک سارینا", "مکانیک پارت"],
+    "حوزه فعالیت": ["ماشین‌آلات", "چوب و کابینت", "نساجی", "قطعات صنعتی"],
+    "منطقه / شهر": ["صفادشت", "صفادشت", "شهریار", "شمس‌آباد"],
+    "وضعیت": ["جدید", "تماس گرفته شده", "جدید", "قرارداد بسته شد"],
+    "شماره تماس": ["09121111111", "09122222222", "09123333333", "09124444444"]
 }
 df = pd.DataFrame(data)
 
-st.subheader("Active Leads Database")
+st.subheader("بانک اطلاعات سرنخ‌های فعال صنعتی")
 st.dataframe(df, use_container_width=True)
