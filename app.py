@@ -26,7 +26,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🎯 ربات جامع و هوشمند بازاریابی غرفه‌داران باسلام")
-st.markdown("تمامی ابزارهای لازم برای دسترسی به غرفه‌ها، لینک‌های مستقیم و متن‌های هدفمند دایرکت")
+st.markdown("دسترسی به اصناف، لینک‌های مستقیم و دکمه واقعی کپی متن دایرکت")
 st.markdown("---")
 
 # دیتابیس کامل و جامع اصناف و غرفه‌ها
@@ -86,7 +86,7 @@ if len(df_filtered) > 0:
         with col2:
             st.markdown(f'<a href="{store_url}" target="_blank"><button style="width:100%;background-color:#FF5A5F;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;">🏪 باز کردن مستقیم صفحه غرفه در باسلام</button></a>', unsafe_allow_html=True)
 
-        # بخش پیام همدلانه همراه با تخفیف ۵۰ درصدی و دکمه کپی
+        # بخش پیام همدلانه و دکمه واقعی کپی با جاوااسکریپت
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
         st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی (تخفیف ۵۰٪):")
         
@@ -97,10 +97,17 @@ if len(df_filtered) > 0:
 اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم نمونه‌کار بفرستم خدمتتون.
 موفق و پرفروش باشید 🤝"""
 
-        st.text_area("می‌توانید متن زیر را کپی کنید:", message_to_copy, height=190)
+        st.text_area("پیش‌نمایش متن:", message_to_copy, height=190)
         
-        if st.button("📋 کپی کردن متن پیام با یک کلیک"):
-            st.toast("متن با موفقیت کپی شد! حالا توی دایرکت غرفه‌دار پیستش کن.", icon="✅")
+        # استفاده از دکمه HTML/JS اختصاصی برای کپی دقیق و واقعی به کلیپ‌بورد سیستم
+        safe_text = message_to_copy.replace('\n', '\\n').replace('"', '\\"')
+        copy_button_html = f"""
+        <button onclick="navigator.clipboard.writeText(`{message_to_copy}`);alert('متن با موفقیت کپی شد! حالا توی دایرکت پیستش کن.');" 
+            style="width:100%;background-color:#28a745;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px;">
+            📋 کپی کردن واقعی متن پیام با یک کلیک
+        </button>
+        """
+        st.markdown(copy_button_html, unsafe_allow_html=True)
             
         st.markdown('</div>', unsafe_allow_html=True)
 else:
