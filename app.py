@@ -25,8 +25,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🎯 سیستم جامع و هوشمند غرفه‌داران باسلام")
-st.markdown("دسترسی به اصناف مختلف، لینک مستقیم غرفه‌ها و پنل اختصاصی پیام دایرکت")
+st.title("🎯 ربات جامع و هوشمند بازاریابی غرفه‌داران باسلام")
+st.markdown("تمامی ابزارهای لازم برای دسترسی به غرفه‌ها، لینک‌های مستقیم و متن‌های هدفمند دایرکت")
 st.markdown("---")
 
 # دیتابیس کامل و جامع اصناف و غرفه‌ها
@@ -86,9 +86,9 @@ if len(df_filtered) > 0:
         with col2:
             st.markdown(f'<a href="{store_url}" target="_blank"><button style="width:100%;background-color:#FF5A5F;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;">🏪 باز کردن مستقیم صفحه غرفه در باسلام</button></a>', unsafe_allow_html=True)
 
-        # بخش پیام همدلانه و دکمه کپی
+        # بخش پیام همدلانه همراه با تخفیف ۵۰ درصدی و دکمه کپی
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
-        st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی:")
+        st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی (تخفیف ۵۰٪):")
         
         message_to_copy = """سلام و وقتتون بخیر 🌺
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
