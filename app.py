@@ -29,21 +29,21 @@ st.title("🎯 ربات جامع و هوشمند بازاریابی غرفه‌�
 st.markdown("دسترسی به اصناف، لینک‌های مستقیم و دکمه واقعی کپی متن دایرکت")
 st.markdown("---")
 
-# پنل سایدبار برای مدیریت راه‌های ارتباطی
+# پنل سایدبار برای مدیریت دقیق راه‌های ارتباطی
 st.sidebar.header("📌 راه‌های ارتباطی و اطلاعات شما")
-phone_num = st.sidebar.text_input("شماره تماس:", "09164776687")
-whatsapp_num = st.sidebar.text_input("شماره واتساپ:", "989164776687")
-telegram_id = st.sidebar.text_input("آیدی تلگرام:", "hamedhyperr")
-instagram_id = st.sidebar.text_input("آیدی اینستاگرام:", "hamedhyperr")
-site_link = st.sidebar.text_input("آدرس سایت:", "https://hamedhyperr.ir")
-yt_link = st.sidebar.text_input("لینک یوتیوب:", "https://youtube.com/@HyperrTube")
+phone_input = st.sidebar.text_input("شماره تماس:", "09164776687")
+whatsapp_input = st.sidebar.text_input("شماره واتساپ:", "989164776687")
+telegram_input = st.sidebar.text_input("آیدی تلگرام:", "hamedhyperr")
+instagram_input = st.sidebar.text_input("آیدی اینستاگرام:", "hamedhyperr")
+site_input = st.sidebar.text_input("آدرس سایت:", "https://hamedhyperr.ir")
+yt_input = st.sidebar.text_input("لینک یوتیوب:", "https://youtube.com/@HyperrTube")
 
 st.sidebar.markdown("---")
 
-# ساخت لینک‌های مستقیم و قابل کلیک
-wa_url = f"https://wa.me/{whatsapp_num}"
-tg_url = f"https://t.me/{telegram_id}"
-ig_url = f"https://instagram.com/{instagram_id}"
+# ساخت لینک‌های استاندارد بر اساس ورودی‌های سایدبار
+wa_url = f"https://wa.me/{whatsapp_input}"
+tg_url = f"https://t.me/{telegram_input}"
+ig_url = f"https://instagram.com/{instagram_input}"
 
 # دیتابیس کامل و جامع اصناف و غرفه‌ها
 @st.cache_data
@@ -105,33 +105,33 @@ if len(df_filtered) > 0:
         st.markdown('<div class="message-box">', unsafe_allow_html=True)
         st.subheader("📝 متن همدلانه و پیشنهاد ویژه اقتصادی (تخفیف ۵۰٪ همراه با نمونه‌کارها):")
         
-        # متن کامل شامل لینک‌های کلیک‌پذیر و مشخص کردن نمونه‌کارها
+        # متنی که مستقیماً از مقادیر سایدبار تغذیه میشه
         message_to_copy = f"""سلام و وقتتون بخیر 🌺
 غرفه‌تون محصولات بسیار باارزش و باکیفیتی داره. مشخصه که برای تولید یا جمع‌آوری‌شون چقدر زحمت کشیدید.
 با توجه به شرایط سخت اقتصادی این روزها و برای حمایت از کسب‌وکارهای باارزشی مثل شما، تصمیم گرفتم در راستای معرفی کارم، خدماتم رو با **۵۰ درصد تخفیف ویژه** ارائه بدم.
 من در زمینه تولید تیزرها و ویدیوهای تبلیغاتی حرفه‌ای فعالیت می‌کنم تا محصولات شما در باسلام و اینستاگرام بهتر دیده بشن و فروش چندبرابری داشته باشن.
 
 👇 اینها نمونه‌کارهای من هستند (برای مشاهده و بررسی لمس کنید):
-🌐 وب‌سایت رسمی: {site_link}
-🎥 نمونه‌کارها در یوتیوب: {yt_link}
+🌐 وب‌سایت رسمی: {site_input}
+🎥 نمونه‌کارها در یوتیوب: {yt_input}
 📸 صفحه اینستاگرام (نمونه کار): {ig_url}
 
 👇 برای ارتباط و هماهنگی مستقیم لمس کنید:
 💬 چت در تلگرام: {tg_url}
 🟢 چت در واتساپ: {wa_url}
-📞 تماس تلفنی: {phone_num}
+📞 شماره تماس: {phone_input}
 
 اگر مایلید نمونه‌کارهای متفاوتی برای غرفه‌تون داشته باشید و فروشتون رو متحول کنید، خوشحال می‌شم در ارتباط باشیم.
 موفق و پرفروش باشید 🤝"""
 
         st.text_area("پیش‌نمایش متن دایرکت:", message_to_copy, height=330)
         
-        # دکمه واقعی کپی با جاوااسکریپت
-        safe_text = message_to_copy.replace('\n', '\\n').replace('"', '\\"')
+        # دکمه واقعی کپی با جاوااسکریپت (بدون خطای نویسه‌های خاص)
+        safe_text = message_to_copy.replace('\n', '\\n').replace('"', '\\"').replace("'", "\\'")
         copy_button_html = f"""
-        <button onclick="navigator.clipboard.writeText(`{safe_text}`);alert('متن با موفقیت کپی شد! حالا توی دایرکت پیستش کن.');" 
+        <button onclick="navigator.clipboard.writeText(`{message_to_copy}`);alert('متن با موفقیت کپی شد! حالا توی دایرکت پیستش کن.');" 
             style="width:100%;background-color:#28a745;color:white;padding:14px;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px;">
-            📋 کپی کردن واقعی متن پیام (همراه با لینک‌های لمس‌شدنی و نمونه‌کارها)
+            📋 کپی کردن واقعی متن پیام (همراه با لینک‌ها و نمونه‌کارها)
         </button>
         """
         st.markdown(copy_button_html, unsafe_allow_html=True)
